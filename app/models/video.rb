@@ -1,11 +1,7 @@
 class Video < ApplicationRecord
-    require 'net/http'
-    require 'json'
-    require 'bye-bug'
-    binding.pry
+    # validates :video_uid, presence: true
+    # validates :song_name, presence: true
+    # validates :artist_name, presence: true
+    # validates :city, presence: true
 
-    url = 'https://s3-eu-west-1.amazonaws.com/sofar-eu-1/video_data.json'
-    uri = URI(url)
-    response = Net::HTTP.get(uri)
-    JSON.parse(response)
 end
