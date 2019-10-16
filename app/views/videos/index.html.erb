@@ -1,8 +1,24 @@
-<h3>Search Here</h3>
+<h1>Search Here</h1>
 
 <%= form_tag(videos_path, :method => "get") do %>  
     <%= search_field_tag :search, params[:search], placeholder: "Search" %>  
     <%= submit_tag ("Search") %>
 <% end %>
 
-<%= @videos.length %>
+<h2>
+<% if @videos.count == 0 %>
+    <%= "No Records Found" %>
+<% else %>
+    <%= "#{@videos.count} Record(s) Found" %>
+<% end %>
+</h2>
+
+<br>
+
+<% @videos.each do |video| %>
+    <%= "Artist: #{video.artist_name}" %><br/>
+    <%= "Song: #{video.song_name}" %><br/>
+    <%= "Performed in: #{video.city}" %><br/><br/>
+<% end %>
+
+<br>
