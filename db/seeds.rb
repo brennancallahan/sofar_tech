@@ -17,10 +17,16 @@ data = JSON.parse(response)
 
 data.each do |video|
     if video.present? && video["song"].present?
-        video_uid = video["video_uid"].present? ? video["video_uid"] : "No UID"
-        song_name = video["song"]["title"].present? ? video["song"]["title"].downcase : "No Song Name"
-        artist_name = video["song"]["artist"].present? ? video["song"]["artist"]["title"].downcase : "No Artist Name"
-        city = video["song"]["city"].present? ? video["song"]["city"]["title"].downcase : "No City"
+        video_uid = video["video_uid"].present? ? video["video_uid"] : "no uid"
+        song_name = video["song"]["title"].present? ? video["song"]["title"].downcase : "no song name"
+        artist_name = video["song"]["artist"].present? ? video["song"]["artist"]["title"].downcase : "no artist name"
+        if video["song"]["city"].present? && video["song"]["city"]["title"] == "NYC"
+            city = "new york city"
+        elsif video["song"]["city"].present?
+            city = video["song"]["city"]["title"].downcase
+        else
+            city = "no city"
+        end
         Video.create!(video_uid: video_uid, song_name: song_name, artist_name: artist_name, city: city)
     end
 end
