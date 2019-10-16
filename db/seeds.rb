@@ -9,7 +9,6 @@
 require 'net/http'
 require 'json'
 require 'pry'
-# require 'httparty'
 
 url = 'https://s3-eu-west-1.amazonaws.com/sofar-eu-1/video_data.json'
 uri = URI(url)
@@ -17,12 +16,11 @@ response = Net::HTTP.get(uri)
 data = JSON.parse(response)
 
 data.each do |video|
-    # binding.pry
-    if video.present?
+    if video.present? && video["song"].present?
         video_uid = video["video_uid"].present? ? video["video_uid"] : "No UID"
-        song_name = video["song"].present? ? video["song"]["title"] : "No Song Name"
-        artist_name = video["song"].present? && video["song"]["artist"].present? ? video["song"]["artist"]["title"] : "No Artist Name"
-        city = video["song"].present? && video["song"]["city"].present? ? video["song"]["city"]["title"] : "No City"
+        song_name = video["song"]["title"].present? ? video["song"]["title"] : "No Song Name"
+        artist_name = video["song"]["artist"].present? ? video["song"]["artist"]["title"] : "No Artist Name"
+        city = video["song"]["city"].present? ? video["song"]["city"]["title"] : "No City"
         Video.create!(video_uid: video_uid, song_name: song_name, artist_name: artist_name, city: city)
     end
 end

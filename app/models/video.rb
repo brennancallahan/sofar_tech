@@ -5,9 +5,9 @@ class Video < ApplicationRecord
     # validates :city, presence: true
     def self.search(search)
         if search
-            return where('city LIKE ?', "%#{search}")
+            return where('city LIKE ? or song_name LIKE ? or artist_name LIKE ?', "%#{search}%", "%#{search}%", "%#{search}%" ).distinct
+        else
+            all
         end
-    else
-        all
     end
 end
