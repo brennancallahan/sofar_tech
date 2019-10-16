@@ -21,9 +21,9 @@
 <br>
 
 <% @videos.each do |video| %>
-    <%= "Artist: #{video.artist_name}" %><br/>
-    <%= "Song: #{video.song_name}" %><br/>
-    <%= "Performed in: #{video.city}" %><br/><br/>
+    <%= "Artist: #{video.artist_name.split.map(&:capitalize).join(' ')}" %><br/>
+    <%= "Song: #{video.song_name.split.map(&:capitalize).join(' ')}" %><br/>
+    <%= "Performed in: #{video.city.split.map(&:capitalize).join(' ')}" %><br/><br/>
 <% end %>
 
 <br>
