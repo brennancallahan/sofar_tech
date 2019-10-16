@@ -7,23 +7,23 @@
 
 <% if @videos.count == 0 %>
     <h2><%= "No Records Found" %></h2>
-    <p><%= link_to 'Go Back', :back %></p><br/>
+    <%= link_to 'Go Back', videos_path %><br><br>
 <% elsif @videos.count == 1 %>
     <h2><%= "#{@videos.count} Record Found" %></h2>
-    <p><%= link_to 'Go Back', :back %></p><br/>
+    <%= link_to 'Go Back', videos_path %><br><br>
 <% elsif @videos.count > 1 && params["search"].present? %>
     <h2><%= "#{@videos.count} Records Found" %></h2>
-    <%= link_to 'Go Back', :back %><br/>
+    <%= link_to 'Go Back', videos_path %><br><br>
 <% else %>
     <h2><%= "#{@videos.count} Total Records" %></h2>
 <% end %>
 
-<br>
+
 
 <% @videos.each do |video| %>
-    <%= "Artist: #{video.artist_name.split.map(&:capitalize).join(' ')}" %><br/>
-    <%= "Song: #{video.song_name.split.map(&:capitalize).join(' ')}" %><br/>
-    <%= "Performed in: #{video.city.split.map(&:capitalize).join(' ')}" %><br/><br/>
+    <%= "Artist: #{video.artist_name.split.map(&:capitalize).join(' ')}" %><br>
+    <%= "Song: #{video.song_name.split.map(&:capitalize).join(' ')}" %><br>
+    <%= "Performed in: #{video.city.split.map(&:capitalize).join(' ')}" %><br><br>
 <% end %>
 
-<br>
+
