@@ -19,7 +19,9 @@ data.each do |video|
     if video.present? && video["song"].present?
         video_uid = video["video_uid"].present? ? video["video_uid"] : "no uid"
         song_name = video["song"]["title"].present? ? video["song"]["title"].downcase : "no song name"
+        # downcase is used to sanitize/unify all incoming records for searching purposes
         artist_name = video["song"]["artist"].present? ? video["song"]["artist"]["title"].downcase : "no artist name"
+        # the following block is to account for the many records that have 'nyc' as a city; this is an attempt to sanitize for searching purposes
         if video["song"]["city"].present? && video["song"]["city"]["title"] == "NYC"
             city = "new york city"
         elsif video["song"]["city"].present?
