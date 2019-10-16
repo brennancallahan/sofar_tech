@@ -5,13 +5,18 @@
     <%= submit_tag ("Search") %>
 <% end %>
 
-<h2>
 <% if @videos.count == 0 %>
-    <%= "No Records Found" %>
+    <h2><%= "No Records Found" %></h2>
+    <p><%= link_to 'Go Back', :back %></p><br/>
+<% elsif @videos.count == 1 %>
+    <h2><%= "#{@videos.count} Record Found" %></h2>
+    <p><%= link_to 'Go Back', :back %></p><br/>
+<% elsif @videos.count > 1 && params["search"].present? %>
+    <h2><%= "#{@videos.count} Records Found" %></h2>
+    <%= link_to 'Go Back', :back %><br/>
 <% else %>
-    <%= "#{@videos.count} Record(s) Found" %>
+    <h2><%= "#{@videos.count} Total Records" %></h2>
 <% end %>
-</h2>
 
 <br>
 
